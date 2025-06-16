@@ -1,20 +1,27 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven3'  // Match this with your Jenkins tool name
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Clone Repo') {
             steps {
-                git 'https://github.com/<your-username>/simple-webapp.git'
+                git 'https://github.com/kusumanjali540/simple-webapp.git'
             }
         }
+
         stage('Build') {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage('Run') {
+
+        stage('Deploy') {
             steps {
-                sh 'nohup java -jar target/simple-webapp-0.0.1-SNAPSHOT.jar &'
+                echo 'Deploying to local server...'
+                sh 'nohup java -jar target/*.jar &'
             }
         }
     }
