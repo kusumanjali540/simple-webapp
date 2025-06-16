@@ -29,7 +29,7 @@ pipeline {
                 )
                 '''
                 // Wait for app to start
-                bat 'timeout /t 10 >nul'
+               bat 'ping -n 10 127.0.0.1 >nul'
                 // Print application logs to Jenkins console
                 bat 'type springboot.log'
                 // Try accessing the app via curl
