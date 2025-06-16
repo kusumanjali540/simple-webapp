@@ -16,14 +16,14 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Deploying to local server...'
-                sh 'nohup java -jar target/*.jar &'
+                bat 'nohup java -jar target/*.jar &'
             }
         }
     }
