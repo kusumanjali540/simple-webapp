@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying to local server...'
-                bat 'nohup java -jar target/*.jar &'
+               bat 'start /b java -jar target\\*.jar'
             }
         }
     }
