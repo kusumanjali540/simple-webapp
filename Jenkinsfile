@@ -6,11 +6,13 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repo') {
-            steps {
-                git 'https://github.com/kusumanjali540/simple-webapp.git'
-            }
-        }
+      stage('Clone Repo') {
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/kusumanjali540/simple-webapp.git'
+    }
+}
+
 
         stage('Build') {
             steps {
