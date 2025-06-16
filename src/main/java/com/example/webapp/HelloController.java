@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping("/")
     public String hello() {
-        return "Hello from Spring Boot Web App!";
+        return "<h1 style='color: blue;'>Hello from Spring Boot Web App with Blue Color!</h1>";
     }
 }
