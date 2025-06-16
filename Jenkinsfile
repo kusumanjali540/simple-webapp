@@ -22,11 +22,18 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying to local server...'
+                // Start the JAR in background and redirect logs
                 bat '''
                 for %%f in (target\\*.jar) do (
-                    start /b java -jar %%f
+                    start /min cmd /c "java -jar %%f > springboot.log 2>&1"
                 )
                 '''
+                // Wait for app to start
+                bat 'timeout /t 10 >nul'
+                // Print application logs to Jenkins console
+                bat 'type springboot.log'
+                // Try accessing the app via curl
+                bat 'curl http://localhost:8080 || echo Unable to connect'
             }
         }
     }
