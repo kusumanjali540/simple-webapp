@@ -2,17 +2,16 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'  // Match this with your Jenkins tool name
+        maven 'Maven'  // Make sure 'Maven' is defined in Jenkins global tools
     }
 
     stages {
-      stage('Clone Repo') {
-    steps {
-        git branch: 'main',
-            url: 'https://github.com/kusumanjali540/simple-webapp.git'
-    }
-}
-
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/kusumanjali540/simple-webapp.git'
+            }
+        }
 
         stage('Build') {
             steps {
@@ -23,7 +22,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying to local server...'
-               bat 'start /b java -jar target\\*.jar'
+                bat '''
+                for %%f in (target\\*.jar) do (
+                    start /b java -jar %%f
+                )
+                '''
             }
         }
     }
